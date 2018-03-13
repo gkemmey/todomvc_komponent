@@ -1,0 +1,33 @@
+<footer id="footer" class="<%= "hidden" unless @todos.any? || filtering? %>">
+  <span id="todo-count">
+    <%= pluralize @todos.reject(&:is_completed).size, "item" %> left
+  </span>
+
+  <ul id="filters">
+    <li>
+      <%= link_to "All", "/", class: (request.fullpath == '/' ||
+                                      request.fullpath == "/todos") ? "selected" : nil,
+                              id: "all" %>
+    </li>
+    <li>
+      <%= link_to "Active", "/?completed=false",
+                            class: request.fullpath.match("completed=false") ? "selected" : nil,
+                            id: "active" %>
+    </li>
+    <li>
+      <%= link_to "Completed", "/?completed=true",
+                               class: request.fullpath.match("completed=true") ? "selected" : nil,
+                               id: "completed" %>
+    </li>
+  </ul>
+
+  <% if @todos.completed(true).count > 0 %>
+    <%= form_with url: destroy_multiple_todos_path, method: :delete do |f| %>
+      <% @todos.completed(true).pluck(:id).each do |todo| %>
+        <%= hidden_field_tag "ids[]", todo %>
+      <% end %>
+
+      <%= f.button "Clear completed", id: "clear-completed" %>
+    <% end %>
+  <% end %>
+</footer>

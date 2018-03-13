@@ -23,7 +23,7 @@ class TodosController < ApplicationController
     redirect_to todos_path
   end
 
-  def destroy_many
+  def destroy_multiple
     Todo.belonging_to(session_user).where(id: params[:ids]).destroy_all
     redirect_to todos_path
   end
