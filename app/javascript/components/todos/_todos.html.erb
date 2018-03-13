@@ -1,3 +1,8 @@
 <section id="todoapp">
   <%= component 'todos/header' %>
+
+  <section id="main">
+    <%# component 'todos/toggle_all' %>
+    <%= component 'todos/list', todos: @todos %>
+  </section>
 </section>

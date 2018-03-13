@@ -1,0 +1,31 @@
+<ul id="todos">
+  <% @todos.each do |todo| %>
+    <li class="<%= 'completed' if todo.is_completed %>" data-behavior="double_click_to_edit">
+      <div class="view">
+        <%= form_with model: todo do |f| %>
+          <%= f.check_box :is_completed, class: "toggle",
+                                         data: { behavior: "submit_form_when_clicked" } %>
+        <% end %>
+
+        <label data-behavior="hidden_after_double_clicking_to_edit"><%= todo.title %></label>
+
+        <%= form_with model: todo, method: "delete" do |f| %>
+          <%= button_tag "", class: "destroy" %>
+        <% end %>
+      </div>
+
+      <%= form_with model: todo do |f| %>
+        <%= component 'todos/input', f: f, name: :title, class: "edit",
+                                                         style: "display: none;",
+                                                         data: {
+                                                           behavior: [
+                                                             "visible_after_double_clicking_to_edit",
+                                                             "submit_form_when_blurred",
+                                                             "cancel_edit_on_escape"
+                                                           ].join(' ')
+                                                         },
+                                                         autocomplete: "off" %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
