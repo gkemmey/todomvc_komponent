@@ -1,0 +1,11 @@
+<%= form_with url: update_multiple_todos_path, scope: :todo, method: :put do |f| %>
+  <% @todos.each do |todo| %>
+    <%= hidden_field_tag "ids[]", todo.id %>
+  <% end %>
+
+  <%= f.check_box :is_completed, checked: @todos.all?(&:is_completed),
+                                 id: "toggle-all",
+                                 data: { behavior: "submit_form_when_clicked" } %>
+
+  <label for="toggle-all">Mark all as complete</label>
+<% end %>

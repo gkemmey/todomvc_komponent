@@ -2,7 +2,7 @@
   <%= component 'todos/header' %>
 
   <section id="main">
-    <%# component 'todos/toggle_all' %>
+    <%= component 'todos/toggle_all', todos: @todos %>
     <%= component 'todos/list', todos: @todos %>
   </section>
 </section>

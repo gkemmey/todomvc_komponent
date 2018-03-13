@@ -13,7 +13,7 @@ class TodosController < ApplicationController
     redirect_to todos_path
   end
 
-  def update_many
+  def update_multiple
     Todo.belonging_to(session_user).where(id: params[:ids]).update_all(todo_params.to_h)
     redirect_to todos_path
   end
