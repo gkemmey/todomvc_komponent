@@ -1,0 +1,10 @@
+<header id="header" data-turbolinks-permanent>
+  <h1>todos</h1>
+  <%= form_with model: Todo.new, data: { behavior: "has_children_that_clear_after_submission" } do |f| %>
+    <%= component 'todos/input', f: f, name: :title, id: "new-todo",
+                                                     data: { behavior: "clears_after_submission" },
+                                                     placeholder: "What needs to be done?",
+                                                     autofocus: true,
+                                                     autocomplete: "off" %>
+  <% end %>
+</header>

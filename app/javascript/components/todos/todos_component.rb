@@ -1,3 +1,3 @@
-module HelloWorldComponent
+module TodosComponent
   extend ComponentHelper
 end

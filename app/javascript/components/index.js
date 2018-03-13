@@ -1,1 +1,1 @@
-import "components/hello_world/hello_world";
+import "components/todos/todos";
